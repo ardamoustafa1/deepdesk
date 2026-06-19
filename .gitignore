@@ -1,0 +1,21 @@
+# Ortam değişkenleri (API anahtarınızı asla commit etmeyin!)
+.env
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+venv/
+.venv/
+
+# Hafıza veritabanı (kişisel/lokal veri, repoya dahil edilmemeli)
+.chroma_memory/
+
+# Raporlar (isteğe bağlı — örnek bir tane elde tutup diğerlerini ignore edebilirsiniz)
+reports/*.md
+!reports/.gitkeep
+
+# IDE
+.vscode/
+.idea/
