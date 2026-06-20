@@ -12,3 +12,18 @@ test/production) kolay yapılandırma sağlar.
 
 import os
 from dataclasses import dataclass
+from dotenv import load_dotenv
+
+# .env dosyasını yükle (proje kök dizininde olmalı)
+load_dotenv()
+
+
+@dataclass(frozen=True)
+class Settings:
+    anthropic_api_key: str
+    model_name: str
+    chroma_persist_dir: str
+    max_subquestions: int
+
+
+def load_settings() -> Settings:
