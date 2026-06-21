@@ -23,3 +23,17 @@ Sprint 1 için toplam kapasite: **21 puan** (2 hafta, solo geliştirme).
 | US-04 | Writer Agent: bulguları rapora dönüştürme | 3 | ✅ Tamamlandı |
 | US-05 | Hafıza katmanı: ChromaDB entegrasyonu | 5 | ✅ Tamamlandı |
 | US-06 | Orchestrator: agent'ları birbirine bağlama | 3 | ✅ Tamamlandı |
+| US-07 | CLI arayüzü (rich ile) | 2 | ✅ Tamamlandı |
+| US-08 | Birim testleri (planner + hafıza) | 3 | ✅ Tamamlandı |
+| US-09 | README ve dokümantasyon | 2 | ✅ Tamamlandı |
+
+**Toplam tamamlanan:** 28 / 21 puan (kapasitenin üzerinde — solo
+geliştiricinin yoğun çalışmasıyla mümkün oldu, Sprint 2'de daha
+gerçekçi bir hedef belirlenecek).
+
+## Sprint 2'ye Aktarılan (Backlog'da Bekleyen)
+| ID | User Story | Tahmini Puan |
+|---|---|---|
+| US-10 | Streamlit tabanlı basit web arayüzü | 5 |
+| US-11 | Rapor kalitesi için kullanıcı geri bildirim döngüsü | 3 |
+| US-12 | Çoklu dil desteği (EN/TR) | 3 |
