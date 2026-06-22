@@ -27,3 +27,17 @@ Kurallar:
 {{"sub_questions": ["soru 1", "soru 2", "..."]}}
 """
 
+
+class PlannerAgent:
+    def __init__(self, client: Anthropic, model_name: str, max_questions: int = 4):
+        self.client = client
+        self.model_name = model_name
+        self.max_questions = max_questions
+
+    def plan(self, topic: str) -> list[str]:
+        """Verilen konuyu alt sorulara böler ve liste olarak döner."""
+        response = self.client.messages.create(
+            model=self.model_name,
+            max_tokens=500,
+            system=PLANNER_SYSTEM_PROMPT.format(max_questions=self.max_questions),
+            messages=[{"role": "user", "content": f"Araştırma konusu: {topic}"}],
