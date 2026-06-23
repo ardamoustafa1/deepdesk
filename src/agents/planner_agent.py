@@ -41,3 +41,18 @@ class PlannerAgent:
             max_tokens=500,
             system=PLANNER_SYSTEM_PROMPT.format(max_questions=self.max_questions),
             messages=[{"role": "user", "content": f"Araştırma konusu: {topic}"}],
+        )
+
+        raw_text = "".join(
+            block.text for block in response.content if block.type == "text"
+        )
+
+        try:
+            # Model bazen JSON'u ```json bloğu içine koyabilir, temizleyelim
+            cleaned = raw_text.strip().removeprefix("```json").removesuffix("```").strip()
+            parsed = json.loads(cleaned)
+            return parsed["sub_questions"][: self.max_questions]
+        except (json.JSONDecodeError, KeyError) as exc:
+            raise ValueError(
+                f"Planner Agent geçerli JSON döndürmedi: {raw_text}"
+            ) from exc
