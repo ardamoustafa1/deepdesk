@@ -34,3 +34,23 @@ def test_plan_parses_valid_json():
     result = agent.plan("test konusu")
 
     assert result == ["Soru 1?", "Soru 2?", "Soru 3?"]
+
+
+def test_plan_respects_max_questions_limit():
+    fake_json = '{"sub_questions": ["S1", "S2", "S3", "S4", "S5"]}'
+    client = FakeAnthropicClient(fake_json)
+    agent = PlannerAgent(client, model_name="fake-model", max_questions=2)
+
+    result = agent.plan("test konusu")
+
+    assert len(result) == 2
+
+
+def test_plan_strips_markdown_code_fence():
+    fake_json = '```json\n{"sub_questions": ["Soru 1?"]}\n```'
+    client = FakeAnthropicClient(fake_json)
+    agent = PlannerAgent(client, model_name="fake-model", max_questions=4)
+
+    result = agent.plan("test konusu")
+
+    assert result == ["Soru 1?"]
