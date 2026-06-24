@@ -18,3 +18,14 @@
 
 ## Board Geçmişi (Özet)
 
+- **19 Haziran:** Board oluşturuldu, 9 story "To Do" kolonunda.
+- **22 Haziran:** US-01, US-02 "Done" kolonuna taşındı.
+- **25 Haziran:** US-03 "In Progress" → "Done".
+- **28 Haziran:** US-04, US-06 "Done" kolonuna taşındı.
+- **1 Temmuz:** US-05 "Done" kolonuna taşındı.
+- **5 Temmuz:** US-07, US-08, US-09 tamamlandı — board tamamen "Done".
+
+> Not: Gerçek proje yönetim aracında (Trello/Miro/GitHub Projects)
+> tutulan board'un ekran görüntüleri `docs/sprint1/screenshots/`
+> klasörüne eklenmelidir (bu klasörü oluşturup kendi board
+> görüntülerinizi ekleyin).
