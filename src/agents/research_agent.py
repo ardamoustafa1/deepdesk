@@ -31,3 +31,20 @@ class ResearchFinding:
 class ResearchAgent:
     def __init__(self, client: Anthropic, model_name: str):
         self.client = client
+        self.model_name = model_name
+
+    def research(self, question: str) -> ResearchFinding:
+        """Tek bir alt soruyu web_search tool'u ile araştırır."""
+        response = self.client.messages.create(
+            model=self.model_name,
+            max_tokens=1000,
+            system=RESEARCH_SYSTEM_PROMPT,
+            tools=[{"type": "web_search_20250305", "name": "web_search"}],
+            messages=[{"role": "user", "content": question}],
+        )
+
+        summary_parts = []
+        sources = []
+
+        for block in response.content:
+            if block.type == "text":
