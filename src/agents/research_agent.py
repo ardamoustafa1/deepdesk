@@ -48,3 +48,20 @@ class ResearchAgent:
 
         for block in response.content:
             if block.type == "text":
+                summary_parts.append(block.text)
+            elif block.type == "web_search_tool_result":
+                # Her sonuçtan URL'leri kaynak listesine ekle
+                for result in getattr(block, "content", []):
+                    url = getattr(result, "url", None)
+                    if url and url not in sources:
+                        sources.append(url)
+
+        return ResearchFinding(
+            question=question,
+            summary=" ".join(summary_parts).strip(),
+            sources=sources,
+        )
+
+    def research_all(self, questions: list[str]) -> list[ResearchFinding]:
+        """Birden fazla alt soruyu sırayla araştırır."""
+        return [self.research(q) for q in questions]
