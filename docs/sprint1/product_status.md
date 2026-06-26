@@ -29,3 +29,19 @@ Alt Sorular:
   • Hangi sektörler AI agent'ları en çok benimsiyor?
   • Öne çıkan AI agent platformları hangileri?
   • 2026'da AI agent alanındaki temel riskler neler?
+
+--- RAPOR ---
+[... otomatik üretilen, kaynaklı Markdown rapor ...]
+
+Rapor kaydedildi: reports/20260705_143022_report.md
+```
+
+## Bilinen Sınırlamalar (Sprint 2'de ele alınacak)
+- Şu an yalnızca CLI üzerinden kullanılabiliyor (web arayüzü yok)
+- Tek seferde tek konu araştırılabiliyor (batch mod yok)
+- Rapor uzunluğu şu an sabit bir token limitiyle sınırlı
+
+## Ekran Görüntüsü Notu
+> Gerçek terminal çıktısının ekran görüntüsünü çekip bu dosyaya (veya
+> `docs/sprint1/screenshots/` klasörüne) eklemeyi unutmayın —
+> değerlendirme sürecinde görsel kanıt önemlidir.
