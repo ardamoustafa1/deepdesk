@@ -13,3 +13,19 @@ Sprint 1 sonunda DeepDesk'in **çekirdek MVP'si tam fonksiyonel** durumda:
 
 ## Örnek Kullanım Akışı
 
+```bash
+$ python main.py "yapay zeka ajanlarının 2026 pazar trendleri"
+
+╭─────────────────────────────────────────╮
+│ DeepDesk Araştırma Asistanı              │
+│ Konu: yapay zeka ajanlarının 2026 pazar  │
+│ trendleri                                │
+╰─────────────────────────────────────────╯
+
+⠋ Planlanıyor, araştırılıyor ve yazılıyor...
+
+Alt Sorular:
+  • AI agent pazarının 2026 büyüklüğü nedir?
+  • Hangi sektörler AI agent'ları en çok benimsiyor?
+  • Öne çıkan AI agent platformları hangileri?
+  • 2026'da AI agent alanındaki temel riskler neler?
