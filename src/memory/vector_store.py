@@ -32,3 +32,22 @@ class ResearchMemory:
         """Tamamlanan bir araştırmayı hafızaya kaydeder."""
         existing_count = self.collection.count()
         self.collection.add(
+            documents=[report],
+            metadatas=[{"topic": topic}],
+            ids=[f"research-{existing_count + 1}"],
+        )
+
+    def find_related(self, topic: str, n_results: int = 2) -> list[str]:
+        """Yeni konuyla ilgili geçmiş araştırmaları getirir.
+
+        Koleksiyon boşsa (ilk çalıştırma) boş liste döner.
+        """
+        if self.collection.count() == 0:
+            return []
+
+        results = self.collection.query(
+            query_texts=[topic],
+            n_results=min(n_results, self.collection.count()),
+        )
+        documents = results.get("documents", [[]])
+        return documents[0] if documents else []
