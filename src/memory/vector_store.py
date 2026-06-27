@@ -15,3 +15,20 @@ ChromaDB, metinleri otomatik olarak embedding'e çevirip diskte kalıcı
 """
 
 import chromadb
+from chromadb.config import Settings as ChromaSettings
+
+
+class ResearchMemory:
+    def __init__(self, persist_dir: str):
+        self.client = chromadb.PersistentClient(
+            path=persist_dir,
+            settings=ChromaSettings(anonymized_telemetry=False),
+        )
+        self.collection = self.client.get_or_create_collection(
+            name="research_history"
+        )
+
+    def save(self, topic: str, report: str) -> None:
+        """Tamamlanan bir araştırmayı hafızaya kaydeder."""
+        existing_count = self.collection.count()
+        self.collection.add(
