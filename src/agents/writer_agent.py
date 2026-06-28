@@ -36,3 +36,16 @@ class WriterAgent:
             model=self.model_name,
             max_tokens=2000,
             system=WRITER_SYSTEM_PROMPT,
+            messages=[
+                {
+                    "role": "user",
+                    "content": (
+                        f"Ana araştırma konusu: {topic}\n\n"
+                        f"Toplanan bulgular:\n{findings_text}\n\n"
+                        "Bu bulgulara dayanarak nihai raporu yaz."
+                    ),
+                }
+            ],
+        )
+
+        return "".join(block.text for block in response.content if block.type == "text")
