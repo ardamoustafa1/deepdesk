@@ -23,3 +23,16 @@ Kaynakları raporun sonunda 'Kaynaklar' başlığı altında listele."""
 
 class WriterAgent:
     def __init__(self, client: Anthropic, model_name: str):
+        self.client = client
+        self.model_name = model_name
+
+    def write_report(self, topic: str, findings: list[ResearchFinding]) -> str:
+        findings_text = "\n\n".join(
+            f"### Alt Soru: {f.question}\n{f.summary}\nKaynaklar: {', '.join(f.sources) or 'yok'}"
+            for f in findings
+        )
+
+        response = self.client.messages.create(
+            model=self.model_name,
+            max_tokens=2000,
+            system=WRITER_SYSTEM_PROMPT,
