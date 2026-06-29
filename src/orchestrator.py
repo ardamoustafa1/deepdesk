@@ -52,3 +52,22 @@ class DeepDeskOrchestrator:
         # 2) Konuyu alt sorulara böl
         sub_questions = self.planner.plan(topic)
 
+        # 3) Her alt soruyu araştır
+        findings = self.researcher.research_all(sub_questions)
+
+        # 4) Nihai raporu yaz (varsa geçmiş bağlamı da ekleyerek)
+        report = self.writer.write_report(topic, findings)
+        if used_memory:
+            memory_note = "\n\n> _Not: Bu rapor, geçmiş araştırmalarınızdan da faydalanılarak hazırlanmıştır._"
+            report += memory_note
+
+        # 5) Yeni raporu hafızaya kaydet
+        self.memory.save(topic, report)
+
+        return ResearchResult(
+            topic=topic,
+            sub_questions=sub_questions,
+            findings=findings,
+            report=report,
+            used_memory=used_memory,
+        )
