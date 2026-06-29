@@ -34,3 +34,21 @@ class ResearchResult:
     report: str
     used_memory: bool
 
+
+class DeepDeskOrchestrator:
+    def __init__(self, settings: Settings):
+        client = Anthropic(api_key=settings.anthropic_api_key)
+
+        self.planner = PlannerAgent(client, settings.model_name, settings.max_subquestions)
+        self.researcher = ResearchAgent(client, settings.model_name)
+        self.writer = WriterAgent(client, settings.model_name)
+        self.memory = ResearchMemory(settings.chroma_persist_dir)
+
+    def run(self, topic: str) -> ResearchResult:
+        # 1) Hafızada ilgili geçmiş araştırma var mı kontrol et
+        related_memories = self.memory.find_related(topic)
+        used_memory = len(related_memories) > 0
+
+        # 2) Konuyu alt sorulara böl
+        sub_questions = self.planner.plan(topic)
+
