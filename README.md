@@ -35,3 +35,29 @@ Böylece kullanıcı, saatler sürebilecek bir araştırma sürecini dakikalar
 içinde, güvenilir kaynaklara dayanan bir raporla tamamlar.
 
 ## Ürün Özellikleri
+- 🤖 **Çok-ajanlı orkestrasyon**: Planner → Researcher → Writer akışı
+- 🧠 **Kalıcı hafıza**: ChromaDB ile geçmiş araştırmalar saklanır ve geri çağrılır
+- 🔎 **Gerçek zamanlı web araştırması**: Anthropic web_search tool entegrasyonu
+- 📄 **Otomatik raporlama**: Her araştırma Markdown dosyası olarak kaydedilir
+- 🎨 **Zengin terminal arayüzü**: `rich` kütüphanesi ile okunabilir çıktı
+- ✅ **Test edilmiş kod**: Birim testleriyle doğrulanmış planner ve hafıza mantığı
+
+## Hedef Kitle
+- Öğrenciler (ödev/tez ön araştırması)
+- Girişimciler (pazar/rakip araştırması)
+- Analistler ve içerik üreticileri (hızlı ön bilgi toplama)
+- 18-45 yaş arası, bilgiye hızlı ve güvenilir şekilde ulaşmak isteyen herkes
+
+## Product Backlog
+Sprint backlog ve görev dağılımı için bkz. [`docs/sprint1/backlog.md`](docs/sprint1/backlog.md)
+
+---
+
+## 🚀 Kurulum
+
+```bash
+# 1. Repoyu klonlayın
+git clone <repo-url>
+cd deepdesk
+
+# 2. Sanal ortam oluşturun (önerilir)
