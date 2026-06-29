@@ -16,3 +16,21 @@ Akış:
 5. Raporu hafızaya kaydet.
 """
 
+from dataclasses import dataclass
+from anthropic import Anthropic
+
+from src.agents.planner_agent import PlannerAgent
+from src.agents.research_agent import ResearchAgent, ResearchFinding
+from src.agents.writer_agent import WriterAgent
+from src.memory.vector_store import ResearchMemory
+from src.utils.config import Settings
+
+
+@dataclass
+class ResearchResult:
+    topic: str
+    sub_questions: list[str]
+    findings: list[ResearchFinding]
+    report: str
+    used_memory: bool
+
