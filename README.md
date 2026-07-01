@@ -61,3 +61,28 @@ git clone <repo-url>
 cd deepdesk
 
 # 2. Sanal ortam oluşturun (önerilir)
+python -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
+
+# 3. Bağımlılıkları kurun
+pip install -r requirements.txt
+
+# 4. Ortam değişkenlerini ayarlayın
+cp .env.example .env
+# .env dosyasını açıp ANTHROPIC_API_KEY değerinizi girin
+```
+
+## ▶️ Kullanım
+
+```bash
+python main.py "elektrikli araç pazarı 2026 trendleri"
+```
+
+Rapor hem terminalde gösterilir hem de `reports/` klasörüne
+`.md` dosyası olarak kaydedilir.
+
+## 🧪 Testleri Çalıştırma
+
+```bash
+pytest tests/ -v
+```
