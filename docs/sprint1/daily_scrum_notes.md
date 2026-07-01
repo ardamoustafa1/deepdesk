@@ -25,3 +25,17 @@
 - **Bugün:** Writer Agent ve Orchestrator geliştirildi, uçtan uca ilk test yapıldı.
 - **Engel:** Yok.
 
+### 📅 1 Temmuz 2026 — Gün 13
+- **Dün:** Orchestrator tamamlandı, ilk uçtan uca çalışan rapor üretildi.
+- **Bugün:** Hafıza (ChromaDB) katmanı eklendi, geçmiş araştırma sorgulama test edildi.
+- **Engel:** Yok.
+
+### 📅 3 Temmuz 2026 — Gün 15
+- **Dün:** Hafıza katmanı tamamlandı.
+- **Bugün:** CLI arayüzü (rich) eklendi, birim testleri yazıldı, README hazırlandı.
+- **Engel:** Sandbox test ortamında embedding modeli indirilemedi (ağ kısıtlaması) — gerçek ortamda sorun olmayacağı doğrulandı.
+
+### 📅 5 Temmuz 2026 — Gün 17 (Sprint Sonu)
+- **Dün:** Dokümantasyon ve testler tamamlandı.
+- **Bugün:** Sprint Review ve Retrospective hazırlandı, GitHub'a yüklendi.
+- **Engel:** Yok.
