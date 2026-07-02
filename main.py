@@ -39,3 +39,25 @@ def main() -> None:
     ) as progress:
         task = progress.add_task("Planlanıyor, araştırılıyor ve yazılıyor...", total=None)
         result = orchestrator.run(topic)
+        progress.update(task, completed=True)
+
+    console.print("\n[bold green]Alt Sorular:[/]")
+    for q in result.sub_questions:
+        console.print(f"  • {q}")
+
+    if result.used_memory:
+        console.print("\n[bold yellow]Not:[/] Geçmiş araştırmalarınızdan yararlanıldı.")
+
+    console.print("\n[bold cyan]--- RAPOR ---[/]\n")
+    console.print(result.report)
+
+    # Raporu dosyaya kaydet
+    reports_dir = Path("reports")
+    reports_dir.mkdir(exist_ok=True)
+    filename = reports_dir / f"{datetime.now():%Y%m%d_%H%M%S}_report.md"
+    filename.write_text(result.report, encoding="utf-8")
+    console.print(f"\n[bold green]Rapor kaydedildi:[/] {filename}")
+
+
+if __name__ == "__main__":
+    main()
