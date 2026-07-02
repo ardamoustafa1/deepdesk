@@ -18,3 +18,14 @@ hafıza katmanı fonksiyonel.
 
 ## Tamamlanamayan / Ertelenen İşler
 Yok — planlanan tüm US-01 ile US-09 arası story'ler tamamlandı.
+(US-10, US-11, US-12 zaten Sprint 2 için planlanmıştı.)
+
+## Paydaş (Stakeholder) Geri Bildirimi
+> Solo geliştirme sürecinde bu rol bootcamp eğitim asistanı ile yapılan
+> ofis saati görüşmelerinde karşılanmaya çalışılacaktır. İlk geri
+> bildirim için asistan ile görüşme planlanmıştır.
+
+## Sonraki Sprint'e Taşınan Öncelikler
+1. Basit bir web arayüzü ekleme (kullanıcı deneyimini iyileştirmek için)
+2. Rapor kalitesini artıracak geri bildirim döngüsü
+3. Çoklu dil desteği
