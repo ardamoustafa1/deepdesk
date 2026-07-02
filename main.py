@@ -18,3 +18,24 @@ from rich.panel import Panel
 from rich.progress import Progress, SpinnerColumn, TextColumn
 
 from src.orchestrator import DeepDeskOrchestrator
+from src.utils.config import load_settings
+
+console = Console()
+
+
+def main() -> None:
+    if len(sys.argv) < 2:
+        console.print("[bold red]Kullanım:[/] python main.py \"araştırma konusu\"")
+        sys.exit(1)
+
+    topic = " ".join(sys.argv[1:])
+    console.print(Panel(f"[bold cyan]DeepDesk Araştırma Asistanı[/]\nKonu: {topic}"))
+
+    settings = load_settings()
+    orchestrator = DeepDeskOrchestrator(settings)
+
+    with Progress(
+        SpinnerColumn(), TextColumn("[progress.description]{task.description}"), console=console
+    ) as progress:
+        task = progress.add_task("Planlanıyor, araştırılıyor ve yazılıyor...", total=None)
+        result = orchestrator.run(topic)
