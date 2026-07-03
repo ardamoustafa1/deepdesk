@@ -3,15 +3,15 @@
 > AI Agent tabanlı, hafızaya sahip otonom araştırma asistanı
 
 ## Takım İsmi
-Solo — Bootcamp bursiyeri tarafından tek başına yürütülmektedir
-*(Akademi ekibine bildirilmiştir — bkz. #bootcamp-2026 Slack kanalı)*
+Takım 139 — Solo geliştirme (ekip üyelerine ulaşılamaması nedeniyle
+akademi ekibine bildirilmiştir, bkz. #bootcamp-2026 Slack kanalı)
 
 ## Takım Rolleri
 | İsim | Rol |
 |---|---|
-| [Adınız] | Product Owner |
-| [Adınız] | Scrum Master |
-| [Adınız] | Developer |
+| Arda Moustafa | Product Owner |
+| Arda Moustafa | Scrum Master |
+| Arda Moustafa | Developer |
 
 *Not: Solo geliştirme sürecinde tüm roller aynı kişi tarafından üstlenilmektedir.*
 
@@ -117,10 +117,9 @@ deepdesk/
 - [ ] Sprint 3: PDF export özelliği
 - [ ] Sprint 3: Kullanıcı geri bildirimiyle rapor kalitesini iyileştirme döngüsü
 
-## ⚠️ Diskalifiye Politikasına Uygunluk Notu
-Bu proje sıfırdan, bootcamp bursiyeri tarafından geliştirilmiştir. Kod
-yazım sürecinde AI destekli geliştirme araçları (Claude) bir **geliştirme
-ortağı** olarak kullanılmış olup, bu kullanım bootcamp değerlendirme
-kriterlerinde ayrıca puanlanan "Yapay Zeka Modeli seçimi, kullanımı,
-geliştirmesi" maddesiyle uyumludur. Hazır/satın alınmış bir proje
-kullanılmamıştır.
+## Geliştirme Notu
+Bu proje sıfırdan geliştirilmiştir; hazır/satın alınmış bir proje
+kullanılmamıştır. Geliştirme sürecinde AI destekli kodlama araçları
+kullanılmıştır — bu, bootcamp değerlendirme kriterlerinde ayrıca
+puanlanan "Yapay Zeka Modeli seçimi, kullanımı, geliştirmesi" maddesiyle
+uyumludur.

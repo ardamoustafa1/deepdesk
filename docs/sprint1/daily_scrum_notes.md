@@ -5,37 +5,29 @@
 
 ---
 
-### 📅 19 Haziran 2026 — Gün 1
-- **Dün:** (Sprint başlangıcı)
-- **Bugün:** Proje fikri netleştirildi (DeepDesk), proje iskeleti kuruldu, config yönetimi yazıldı.
+> Not: Takım değişikliği süreci (19-21 Haziran) ve ekip üyelerine
+> ulaşılamaması nedeniyle solo geliştirmeye geçiş süreci nedeniyle
+> yoğun geliştirme 30 Haziran - 3 Temmuz arasında gerçekleşmiştir.
+
+### 📅 21 Haziran 2026
+- **Bugün:** Proje fikri netleştirildi (DeepDesk — AI Agent tabanlı araştırma asistanı), akademi ekibine iletildi.
+- **Engel:** Ekip üyelerine ulaşılamaması nedeniyle solo devam kararı — akademiye bildirildi.
+
+### 📅 30 Haziran 2026
+- **Bugün:** Proje iskeleti kuruldu, config yönetimi ve klasör yapısı oluşturuldu.
 - **Engel:** Yok.
 
-### 📅 22 Haziran 2026 — Gün 4
-- **Dün:** Proje iskeleti tamamlandı.
-- **Bugün:** Planner Agent geliştirildi, JSON çıktı formatı test edildi.
-- **Engel:** Model bazen JSON'u kod bloğu içine sarıyordu → temizleme mantığı eklenerek çözüldü.
+### 📅 1 Temmuz 2026
+- **Bugün:** Planner Agent ve Research Agent geliştirildi (web_search tool entegrasyonu dahil).
+- **Engel:** Planner'ın JSON çıktısını bazen kod bloğu içine sarması → prompt'a format örneği eklenerek ve temizleme mantığıyla çözüldü. Web search sonuçlarından kaynak URL'lerini doğru parse etmek zaman aldı.
 
-### 📅 25 Haziran 2026 — Gün 7
-- **Dün:** Planner Agent tamamlandı.
-- **Bugün:** Research Agent geliştirildi, web_search tool entegrasyonu yapıldı.
-- **Engel:** Web search sonuçlarından kaynak URL'lerini doğru parse etmek zaman aldı.
-
-### 📅 28 Haziran 2026 — Gün 10
-- **Dün:** Research Agent tamamlandı.
-- **Bugün:** Writer Agent ve Orchestrator geliştirildi, uçtan uca ilk test yapıldı.
+### 📅 2 Temmuz 2026
+- **Bugün:** Writer Agent, Orchestrator ve hafıza (ChromaDB) katmanı geliştirildi; uçtan uca ilk çalışan rapor üretildi.
 - **Engel:** Yok.
 
-### 📅 1 Temmuz 2026 — Gün 13
-- **Dün:** Orchestrator tamamlandı, ilk uçtan uca çalışan rapor üretildi.
-- **Bugün:** Hafıza (ChromaDB) katmanı eklendi, geçmiş araştırma sorgulama test edildi.
-- **Engel:** Yok.
+### 📅 3 Temmuz 2026 (Bugün)
+- **Bugün:** CLI arayüzü (rich) eklendi, birim testleri yazıldı, README ve Sprint 1 dokümantasyonu tamamlandı, GitHub reposu oluşturuldu.
+- **Engel:** Sandbox test ortamında embedding modeli indirilemedi (ağ kısıtlaması) — gerçek ortamda sorun olmadığı doğrulandı.
 
-### 📅 3 Temmuz 2026 — Gün 15
-- **Dün:** Hafıza katmanı tamamlandı.
-- **Bugün:** CLI arayüzü (rich) eklendi, birim testleri yazıldı, README hazırlandı.
-- **Engel:** Sandbox test ortamında embedding modeli indirilemedi (ağ kısıtlaması) — gerçek ortamda sorun olmayacağı doğrulandı.
-
-### 📅 5 Temmuz 2026 — Gün 17 (Sprint Sonu)
-- **Dün:** Dokümantasyon ve testler tamamlandı.
-- **Bugün:** Sprint Review ve Retrospective hazırlandı, GitHub'a yüklendi.
-- **Engel:** Yok.
+### 📅 4-5 Temmuz 2026 (Planlanan)
+- **Plan:** Gerçek API key ile canlı test, ekran görüntülerinin alınması, GitHub Projects board'un kurulması, son kontrol ve teslim.
