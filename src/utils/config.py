@@ -39,7 +39,7 @@ def load_settings() -> Settings:
         anthropic_api_key=api_key,
         # Not: Model adları zamanla güncellenebilir.
         # Güncel liste için: https://docs.claude.com/en/docs/about-claude/models
-        model_name=os.getenv("DEEPDESK_MODEL", "claude-sonnet-5"),
+        model_name=os.getenv("DEEPDESK_MODEL", "claude-3-5-sonnet-20241022"),
         chroma_persist_dir=os.getenv("DEEPDESK_MEMORY_DIR", ".chroma_memory"),
         max_subquestions=int(os.getenv("DEEPDESK_MAX_SUBQUESTIONS", "4")),
     )
