@@ -86,3 +86,22 @@ Rapor hem terminalde gösterilir hem de `reports/` klasörüne
 ```bash
 pytest tests/ -v
 ```
+
+> Not: İlk çalıştırmada ChromaDB, embedding modeli için küçük bir dosya
+> (~90MB) indirir; bu yüzden ilk test çalıştırması internet bağlantısı
+> gerektirir ve birkaç saniye sürebilir.
+
+## 📁 Proje Yapısı
+
+```
+deepdesk/
+├── main.py                    # CLI giriş noktası
+├── src/
+│   ├── orchestrator.py        # Agent'ları koordine eden ana mantık
+│   ├── agents/
+│   │   ├── planner_agent.py   # Konuyu alt sorulara böler
+│   │   ├── research_agent.py  # Web'de araştırma yapar
+│   │   └── writer_agent.py    # Nihai raporu yazar
+│   ├── memory/
+│   │   └── vector_store.py    # Kalıcı hafıza (ChromaDB)
+│   └── utils/
