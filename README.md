@@ -1,125 +1,229 @@
-# DeepDesk 🔍
+# DeepDesk
 
-> AI Agent tabanlı, hafızaya sahip otonom araştırma asistanı
+DeepDesk, verilen bir araştırma konusunu çok ajanlı bir akışla planlayan,
+web'de araştıran, rapora dönüştüren ve önceki araştırmaları hafızasında
+tutabilen CLI tabanlı bir araştırma asistanıdır.
 
-## Takım İsmi
-Takım 139 — Solo geliştirme (ekip üyelerine ulaşılamaması nedeniyle
-akademi ekibine bildirilmiştir, bkz. #bootcamp-2026 Slack kanalı)
+Proje, Yapay Zeka ve Teknoloji Akademisi Bootcamp 2026 kapsamında Sprint 1
+MVP teslimi olarak geliştirilmiştir.
 
-## Takım Rolleri
-| İsim | Rol |
-|---|---|
-| Arda Moustafa | Product Owner |
-| Arda Moustafa | Scrum Master |
-| Arda Moustafa | Developer |
+## Proje Durumu
 
-*Not: Solo geliştirme sürecinde tüm roller aynı kişi tarafından üstlenilmektedir.*
+**Son doğrulama:** 3 Temmuz 2026
 
-## Ürün İsmi
-**DeepDesk** — Otonom Araştırma Asistanı
+Sprint 1 kapsamındaki çekirdek MVP çalışır durumdadır:
 
-## Ürün Açıklaması
-DeepDesk, kullanıcının verdiği herhangi bir araştırma konusunu otonom
-olarak ele alan, çok-ajanlı (multi-agent) bir yapay zeka sistemidir.
-Kullanıcı bir konu girdiğinde:
+- Kullanıcı CLI üzerinden bir araştırma konusu girer.
+- Planner Agent konuyu odaklı alt sorulara böler.
+- Research Agent alt sorular için web araması yapar.
+- Writer Agent bulguları profesyonel bir Markdown rapora dönüştürür.
+- ChromaDB tabanlı hafıza katmanı geçmiş araştırmaları saklar.
+- Rapor terminalde gösterilir ve `reports/` klasörüne kaydedilir.
 
-1. **Planner Agent** konuyu odaklanmış alt sorulara böler,
-2. **Research Agent** her alt soruyu web'de araştırıp kaynaklı bulgular
-   toplar,
-3. **Writer Agent** bulguları tutarlı, profesyonel bir Markdown rapora
-   dönüştürür,
-4. **Hafıza (Memory) katmanı** her araştırmayı kalıcı olarak saklar ve
-   yeni bir araştırma geldiğinde geçmiş ilgili çalışmalardan faydalanır.
+Gerçek çalıştırma ve sprint board kanıtları:
 
-Böylece kullanıcı, saatler sürebilecek bir araştırma sürecini dakikalar
-içinde, güvenilir kaynaklara dayanan bir raporla tamamlar.
+- [Terminal çalıştırma ekran görüntüsü](docs/sprint1/screenshots/main_py_test_konusu_terminal.png)
+- [Public GitHub Projects Sprint 1 board ekran görüntüsü](docs/sprint1/screenshots/github_projects_sprint1_board.png)
+- [Public GitHub Projects board](https://github.com/users/ardamoustafa1/projects/1)
 
-## Ürün Özellikleri
-- 🤖 **Çok-ajanlı orkestrasyon**: Planner → Researcher → Writer akışı
-- 🧠 **Kalıcı hafıza**: ChromaDB ile geçmiş araştırmalar saklanır ve geri çağrılır
-- 🔎 **Gerçek zamanlı web araştırması**: Anthropic web_search tool entegrasyonu
-- 📄 **Otomatik raporlama**: Her araştırma Markdown dosyası olarak kaydedilir
-- 🎨 **Zengin terminal arayüzü**: `rich` kütüphanesi ile okunabilir çıktı
-- ✅ **Test edilmiş kod**: Birim testleriyle doğrulanmış planner ve hafıza mantığı
+![DeepDesk terminal çalıştırma ekran görüntüsü](docs/sprint1/screenshots/main_py_test_konusu_terminal.png)
 
-## Hedef Kitle
-- Öğrenciler (ödev/tez ön araştırması)
-- Girişimciler (pazar/rakip araştırması)
-- Analistler ve içerik üreticileri (hızlı ön bilgi toplama)
-- 18-45 yaş arası, bilgiye hızlı ve güvenilir şekilde ulaşmak isteyen herkes
+![Public GitHub Projects Sprint 1 board ekran görüntüsü](docs/sprint1/screenshots/github_projects_sprint1_board.png)
 
-## Product Backlog
-Sprint backlog ve görev dağılımı için bkz. [`docs/sprint1/backlog.md`](docs/sprint1/backlog.md)
+## Ürün Vizyonu
 
----
+Araştırma yapmak isteyen kullanıcıların ilk bilgi toplama ve raporlama
+sürecini hızlandırmak. DeepDesk, tek bir konu girdisinden yapılandırılmış,
+okunabilir ve tekrar kullanılabilir bir araştırma raporu üretir.
 
-## 🚀 Kurulum
+Hedef kullanıcılar:
+
+- Öğrenciler ve akademik ön araştırma yapanlar
+- Girişimciler ve pazar araştırması yapan ekipler
+- Analistler, içerik üreticileri ve ürün ekipleri
+- Hızlı, düzenli ve tekrar kullanılabilir bilgi özeti isteyen kullanıcılar
+
+## Mimari
+
+DeepDesk üç ana ajan ve bir hafıza katmanından oluşur:
+
+```text
+Kullanıcı konusu
+    |
+    v
+Planner Agent
+    |
+    v
+Alt sorular
+    |
+    v
+Research Agent + web arama
+    |
+    v
+Kaynaklı bulgular
+    |
+    v
+Writer Agent
+    |
+    v
+Markdown rapor + ChromaDB hafıza
+```
+
+Ana bileşenler:
+
+- `Planner Agent`: Araştırma konusunu birbirini tamamlayan alt sorulara böler.
+- `Research Agent`: DuckDuckGo HTML araması ile web sonuçlarını toplar ve Groq modeliyle özetler.
+- `Writer Agent`: Alt soru bulgularını tek bir Markdown raporuna dönüştürür.
+- `ResearchMemory`: ChromaDB ile önceki raporları saklar ve benzer konularda geri çağırır.
+- `DeepDeskOrchestrator`: Planner, Research, Writer ve Memory akışını yönetir.
+
+## Teknoloji Yığını
+
+- Python
+- Groq API (`llama-3.3-70b-versatile` varsayılan model)
+- DuckDuckGo HTML search
+- ChromaDB
+- Rich
+- Pytest
+
+## Kurulum
 
 ```bash
-# 1. Repoyu klonlayın
-git clone <repo-url>
+git clone https://github.com/ardamoustafa1/deepdesk.git
 cd deepdesk
 
-# 2. Sanal ortam oluşturun (önerilir)
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
+python3 -m venv venv
+source venv/bin/activate
 
-# 3. Bağımlılıkları kurun
 pip install -r requirements.txt
-
-# 4. Ortam değişkenlerini ayarlayın
 cp .env.example .env
-# .env dosyasını açıp ANTHROPIC_API_KEY değerinizi girin
 ```
 
-## ▶️ Kullanım
+`.env` dosyasına Groq API anahtarınızı ekleyin:
+
+```env
+GROQ_API_KEY=your_api_key_here
+DEEPDESK_MODEL=llama-3.3-70b-versatile
+DEEPDESK_MEMORY_DIR=.chroma_memory
+DEEPDESK_MAX_SUBQUESTIONS=4
+```
+
+Windows kullanıyorsanız sanal ortam aktivasyonu:
+
+```powershell
+venv\Scripts\activate
+```
+
+## Kullanım
 
 ```bash
-python main.py "elektrikli araç pazarı 2026 trendleri"
+python3 main.py "test konusu"
 ```
 
-Rapor hem terminalde gösterilir hem de `reports/` klasörüne
-`.md` dosyası olarak kaydedilir.
+Örnek akış:
 
-## 🧪 Testleri Çalıştırma
+```text
+DeepDesk Araştırma Asistanı
+Konu: test konusu
+
+Alt Sorular:
+  • Test konularının sınıflandırılması nasıl yapılır?
+  • Test konularının öğrenme hedefleri nelerdir?
+  • Test konularının öğrenci başarısına etkisi nedir?
+  • Test konularının öğretim materyalleri ile ilişkisi nasıldır?
+
+--- RAPOR ---
+...
+
+Rapor kaydedildi: reports/20260703_125446_report.md
+```
+
+Rapor hem terminalde gösterilir hem de `reports/` klasörüne Markdown dosyası
+olarak kaydedilir.
+
+## Testler
 
 ```bash
 pytest tests/ -v
 ```
 
-> Not: İlk çalıştırmada ChromaDB, embedding modeli için küçük bir dosya
-> (~90MB) indirir; bu yüzden ilk test çalıştırması internet bağlantısı
-> gerektirir ve birkaç saniye sürebilir.
+Not: ChromaDB ilk çalıştırmada embedding modeli indirebilir. Bu nedenle ilk
+çalıştırma internet bağlantısı gerektirebilir ve sonraki çalıştırmalara göre
+daha uzun sürebilir.
 
-## 📁 Proje Yapısı
+## Proje Yapısı
 
-```
+```text
 deepdesk/
-├── main.py                    # CLI giriş noktası
+├── main.py
 ├── src/
-│   ├── orchestrator.py        # Agent'ları koordine eden ana mantık
+│   ├── orchestrator.py
 │   ├── agents/
-│   │   ├── planner_agent.py   # Konuyu alt sorulara böler
-│   │   ├── research_agent.py  # Web'de araştırma yapar
-│   │   └── writer_agent.py    # Nihai raporu yazar
+│   │   ├── planner_agent.py
+│   │   ├── research_agent.py
+│   │   └── writer_agent.py
 │   ├── memory/
-│   │   └── vector_store.py    # Kalıcı hafıza (ChromaDB)
+│   │   └── vector_store.py
 │   └── utils/
-│       └── config.py          # Ortam değişkeni yönetimi
-├── tests/                     # Birim testleri
-├── docs/sprint1/               # Sprint 1 dokümantasyonu
-└── reports/                    # Oluşturulan raporlar
+│       └── config.py
+├── tests/
+├── docs/
+│   └── sprint1/
+│       ├── backlog.md
+│       ├── daily_scrum_notes.md
+│       ├── product_status.md
+│       ├── sprint_board.md
+│       ├── sprint_retrospective.md
+│       ├── sprint_review.md
+│       └── screenshots/
+├── reports/
+├── requirements.txt
+└── README.md
 ```
 
-## 🗺️ Yol Haritası (Sonraki Sprintler)
-- [ ] Sprint 2: Basit bir web arayüzü (Streamlit/FastAPI)
-- [ ] Sprint 2: Çoklu dil desteği
-- [ ] Sprint 3: PDF export özelliği
-- [ ] Sprint 3: Kullanıcı geri bildirimiyle rapor kalitesini iyileştirme döngüsü
+## Sprint 1 Teslim Kapsamı
+
+Sprint 1 hedefi, uçtan uca çalışan bir MVP üretmekti. Aşağıdaki user story'ler
+tamamlandı ve GitHub Projects board üzerinde `Done` kolonuna taşındı:
+
+| ID | User Story | Durum |
+|---|---|---|
+| US-01 | Proje iskeleti ve config yönetimi kurulumu | Done |
+| US-02 | Planner Agent: konuyu alt sorulara bölme | Done |
+| US-03 | Research Agent: web arama entegrasyonu | Done |
+| US-04 | Writer Agent: bulguları rapora dönüştürme | Done |
+| US-05 | Hafıza katmanı: ChromaDB entegrasyonu | Done |
+| US-06 | Orchestrator: agent'ları birbirine bağlama | Done |
+| US-07 | CLI arayüzü (Rich ile) | Done |
+| US-08 | Birim testleri (planner + hafıza) | Done |
+| US-09 | README ve dokümantasyon | Done |
+
+Sprint dokümantasyonu:
+
+- [Sprint backlog](docs/sprint1/backlog.md)
+- [Sprint board notları](docs/sprint1/sprint_board.md)
+- [Sprint review](docs/sprint1/sprint_review.md)
+- [Sprint retrospective](docs/sprint1/sprint_retrospective.md)
+- [Ürün durumu](docs/sprint1/product_status.md)
+
+## Bilinen Sınırlamalar
+
+- Uygulama şu an CLI üzerinden çalışır; web arayüzü Sprint 2 kapsamına alınmıştır.
+- Tek çalıştırmada tek araştırma konusu işlenir.
+- Web araması ücretsiz DuckDuckGo HTML endpoint'i üzerinden yapıldığı için sonuç kalitesi ve erişilebilirlik dış servise bağlıdır.
+- Rapor uzunluğu model token limitiyle sınırlıdır.
+- Üretilen raporlar kullanıcı tarafından doğrulanmalıdır; DeepDesk karar destek aracı olarak tasarlanmıştır.
+
+## Yol Haritası
+
+- Sprint 2: Streamlit veya FastAPI tabanlı basit web arayüzü
+- Sprint 2: Kullanıcı geri bildirimiyle rapor kalitesi iyileştirme
+- Sprint 2: Çoklu dil desteği
+- Sprint 3: PDF export
+- Sprint 3: Daha gelişmiş kaynak doğrulama ve rapor skorlama
 
 ## Geliştirme Notu
-Bu proje sıfırdan geliştirilmiştir; hazır/satın alınmış bir proje
-kullanılmamıştır. Geliştirme sürecinde AI destekli kodlama araçları
-kullanılmıştır — bu, bootcamp değerlendirme kriterlerinde ayrıca
-puanlanan "Yapay Zeka Modeli seçimi, kullanımı, geliştirmesi" maddesiyle
-uyumludur.
+
+Bu proje sıfırdan geliştirilmiştir. Geliştirme sürecinde AI destekli kodlama
+araçlarından yararlanılmıştır; mimari kararlar, testler, dokümantasyon ve proje
+yönetimi çıktıları Sprint 1 teslim kriterlerine uygun şekilde hazırlanmıştır.
