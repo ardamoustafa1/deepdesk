@@ -20,3 +20,15 @@
 
 ## 🟡 Denenecekler (Başla)
 - Sprint 2'de her user story için önce test yazıp sonra kodu yazmayı
+  (test-driven development) denemek.
+- Kod incelemesi için bootcamp eğitim asistanından daha erken geri
+  bildirim istemek.
+- Story point tahminlerini daha gerçekçi yapmak (Sprint 1'de kapasitenin
+  üzerinde iş tamamlandı, bu sürdürülebilir bir hız olmayabilir).
+
+## Aksiyon Maddeleri
+| Aksiyon | Sorumlu | Hedef Tarih |
+|---|---|---|
+| Sprint 2 planlamasında story point'leri gerçekçi kapasiteye göre ayarla | Solo geliştirici | Sprint 2 başlangıcı |
+| Eğitim asistanıyla ofis saatinde kod incelemesi talep et | Solo geliştirici | Sprint 2, hafta 1 |
+| Planner prompt'una JSON format örneği ekleyerek tutarlılığı artır | Solo geliştirici | Tamamlandı ✅ |
