@@ -105,3 +105,22 @@ deepdesk/
 │   ├── memory/
 │   │   └── vector_store.py    # Kalıcı hafıza (ChromaDB)
 │   └── utils/
+│       └── config.py          # Ortam değişkeni yönetimi
+├── tests/                     # Birim testleri
+├── docs/sprint1/               # Sprint 1 dokümantasyonu
+└── reports/                    # Oluşturulan raporlar
+```
+
+## 🗺️ Yol Haritası (Sonraki Sprintler)
+- [ ] Sprint 2: Basit bir web arayüzü (Streamlit/FastAPI)
+- [ ] Sprint 2: Çoklu dil desteği
+- [ ] Sprint 3: PDF export özelliği
+- [ ] Sprint 3: Kullanıcı geri bildirimiyle rapor kalitesini iyileştirme döngüsü
+
+## ⚠️ Diskalifiye Politikasına Uygunluk Notu
+Bu proje sıfırdan, bootcamp bursiyeri tarafından geliştirilmiştir. Kod
+yazım sürecinde AI destekli geliştirme araçları (Claude) bir **geliştirme
+ortağı** olarak kullanılmış olup, bu kullanım bootcamp değerlendirme
+kriterlerinde ayrıca puanlanan "Yapay Zeka Modeli seçimi, kullanımı,
+geliştirmesi" maddesiyle uyumludur. Hazır/satın alınmış bir proje
+kullanılmamıştır.
