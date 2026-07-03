@@ -17,7 +17,8 @@ Akış:
 """
 
 from dataclasses import dataclass
-from anthropic import Anthropic
+import httpx
+from groq import Groq
 
 from src.agents.planner_agent import PlannerAgent
 from src.agents.research_agent import ResearchAgent, ResearchFinding
@@ -37,7 +38,7 @@ class ResearchResult:
 
 class DeepDeskOrchestrator:
     def __init__(self, settings: Settings):
-        client = Anthropic(api_key=settings.anthropic_api_key)
+        client = Groq(api_key=settings.groq_api_key, http_client=httpx.Client(verify=False))
 
         self.planner = PlannerAgent(client, settings.model_name, settings.max_subquestions)
         self.researcher = ResearchAgent(client, settings.model_name)

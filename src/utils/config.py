@@ -20,26 +20,26 @@ load_dotenv()
 
 @dataclass(frozen=True)
 class Settings:
-    anthropic_api_key: str
+    groq_api_key: str
     model_name: str
     chroma_persist_dir: str
     max_subquestions: int
 
 
 def load_settings() -> Settings:
-    api_key = os.getenv("ANTHROPIC_API_KEY", "")
+    api_key = os.getenv("GROQ_API_KEY") or os.getenv("ANTHROPIC_API_KEY", "")
     if not api_key:
         raise EnvironmentError(
-            "ANTHROPIC_API_KEY bulunamadı. Lütfen .env dosyanızı "
+            "GROQ_API_KEY bulunamadı. Lütfen .env dosyanızı "
             "(.env.example dosyasından kopyalayarak) oluşturun ve "
             "kendi API anahtarınızı ekleyin."
         )
 
     return Settings(
-        anthropic_api_key=api_key,
-        # Not: Model adları zamanla güncellenebilir.
-        # Güncel liste için: https://docs.claude.com/en/docs/about-claude/models
-        model_name=os.getenv("DEEPDESK_MODEL", "claude-3-5-sonnet-20241022"),
+        groq_api_key=api_key,
+        # Not: Groq modelleri zamanla güncellenebilir.
+        # En güçlü çok yönlü model: llama-3.3-70b-versatile
+        model_name=os.getenv("DEEPDESK_MODEL", "llama-3.3-70b-versatile"),
         chroma_persist_dir=os.getenv("DEEPDESK_MEMORY_DIR", ".chroma_memory"),
         max_subquestions=int(os.getenv("DEEPDESK_MAX_SUBQUESTIONS", "4")),
     )

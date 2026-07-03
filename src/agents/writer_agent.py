@@ -10,7 +10,7 @@ akıcı ve okunabilir bir Markdown rapor haline getirmek.
 Kaynaklı Bulgular -> [Writer Agent] -> Nihai Rapor (Markdown)
 """
 
-from anthropic import Anthropic
+from groq import Groq
 from src.agents.research_agent import ResearchFinding
 
 
@@ -22,7 +22,7 @@ Kaynakları raporun sonunda 'Kaynaklar' başlığı altında listele."""
 
 
 class WriterAgent:
-    def __init__(self, client: Anthropic, model_name: str):
+    def __init__(self, client: Groq, model_name: str):
         self.client = client
         self.model_name = model_name
 
@@ -32,11 +32,11 @@ class WriterAgent:
             for f in findings
         )
 
-        response = self.client.messages.create(
+        response = self.client.chat.completions.create(
             model=self.model_name,
             max_tokens=2000,
-            system=WRITER_SYSTEM_PROMPT,
             messages=[
+                {"role": "system", "content": WRITER_SYSTEM_PROMPT},
                 {
                     "role": "user",
                     "content": (
@@ -44,8 +44,9 @@ class WriterAgent:
                         f"Toplanan bulgular:\n{findings_text}\n\n"
                         "Bu bulgulara dayanarak nihai raporu yaz."
                     ),
-                }
+                },
             ],
+            temperature=0.5,
         )
 
-        return "".join(block.text for block in response.content if block.type == "text")
+        return response.choices[0].message.content or ""

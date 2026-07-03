@@ -9,26 +9,32 @@ from types import SimpleNamespace
 from src.agents.planner_agent import PlannerAgent
 
 
-class FakeTextBlock:
+class FakeMessage:
     def __init__(self, text):
-        self.type = "text"
-        self.text = text
+        self.content = text
 
 
-class FakeAnthropicClient:
-    """Anthropic client'ı taklit eden basit bir sahte (mock) sınıf."""
+class FakeChoice:
+    def __init__(self, text):
+        self.message = FakeMessage(text)
+
+
+class FakeGroqClient:
+    """Groq client'ı taklit eden basit bir sahte (mock) sınıf."""
 
     def __init__(self, fake_response_text: str):
         self.fake_response_text = fake_response_text
-        self.messages = SimpleNamespace(create=self._create)
+        self.chat = SimpleNamespace(
+            completions=SimpleNamespace(create=self._create)
+        )
 
     def _create(self, **kwargs):
-        return SimpleNamespace(content=[FakeTextBlock(self.fake_response_text)])
+        return SimpleNamespace(choices=[FakeChoice(self.fake_response_text)])
 
 
 def test_plan_parses_valid_json():
     fake_json = '{"sub_questions": ["Soru 1?", "Soru 2?", "Soru 3?"]}'
-    client = FakeAnthropicClient(fake_json)
+    client = FakeGroqClient(fake_json)
     agent = PlannerAgent(client, model_name="fake-model", max_questions=4)
 
     result = agent.plan("test konusu")
@@ -38,7 +44,7 @@ def test_plan_parses_valid_json():
 
 def test_plan_respects_max_questions_limit():
     fake_json = '{"sub_questions": ["S1", "S2", "S3", "S4", "S5"]}'
-    client = FakeAnthropicClient(fake_json)
+    client = FakeGroqClient(fake_json)
     agent = PlannerAgent(client, model_name="fake-model", max_questions=2)
 
     result = agent.plan("test konusu")
@@ -48,7 +54,7 @@ def test_plan_respects_max_questions_limit():
 
 def test_plan_strips_markdown_code_fence():
     fake_json = '```json\n{"sub_questions": ["Soru 1?"]}\n```'
-    client = FakeAnthropicClient(fake_json)
+    client = FakeGroqClient(fake_json)
     agent = PlannerAgent(client, model_name="fake-model", max_questions=4)
 
     result = agent.plan("test konusu")

@@ -11,7 +11,7 @@ Kullanıcı Sorusu -> [Planner Agent] -> Alt Sorular -> [Research Agent]
 """
 
 import json
-from anthropic import Anthropic
+from groq import Groq
 
 
 PLANNER_SYSTEM_PROMPT = """Sen bir araştırma planlama uzmanısın. Görevin,
@@ -29,23 +29,25 @@ Kurallar:
 
 
 class PlannerAgent:
-    def __init__(self, client: Anthropic, model_name: str, max_questions: int = 4):
+    def __init__(self, client: Groq, model_name: str, max_questions: int = 4):
         self.client = client
         self.model_name = model_name
         self.max_questions = max_questions
 
     def plan(self, topic: str) -> list[str]:
         """Verilen konuyu alt sorulara böler ve liste olarak döner."""
-        response = self.client.messages.create(
+        response = self.client.chat.completions.create(
             model=self.model_name,
             max_tokens=500,
-            system=PLANNER_SYSTEM_PROMPT.format(max_questions=self.max_questions),
-            messages=[{"role": "user", "content": f"Araştırma konusu: {topic}"}],
+            messages=[
+                {"role": "system", "content": PLANNER_SYSTEM_PROMPT.format(max_questions=self.max_questions)},
+                {"role": "user", "content": f"Araştırma konusu: {topic}"},
+            ],
+            temperature=0.3,
+            response_format={"type": "json_object"},
         )
 
-        raw_text = "".join(
-            block.text for block in response.content if block.type == "text"
-        )
+        raw_text = response.choices[0].message.content or ""
 
         try:
             # Model bazen JSON'u ```json bloğu içine koyabilir, temizleyelim
