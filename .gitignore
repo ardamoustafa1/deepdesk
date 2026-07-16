@@ -16,6 +16,21 @@ venv/
 reports/*.md
 !reports/.gitkeep
 
+# Kullanıcı geri bildirimleri (kişisel/lokal veri, repoya dahil edilmemeli)
+reports/feedback.json
+
 # IDE
 .vscode/
 .idea/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# AI tools
+.claude/

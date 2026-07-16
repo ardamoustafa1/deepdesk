@@ -15,10 +15,22 @@ from groq import Groq
 import httpx
 
 
-RESEARCH_SYSTEM_PROMPT = """Sen bir araştırma asistanısın. Sana verilen
+RESEARCH_SYSTEM_PROMPT_TR = """Sen bir araştırma asistanısın. Sana verilen
 soruyu ve web'den elde edilen güncel bulguları inceleyerek 3-5 cümlelik,
 öz ve doğrudan bilgi veren bir özet çıkar. Spekülasyon yapma; yalnızca
 bulduğun bilgilere dayanarak yaz."""
+
+RESEARCH_SYSTEM_PROMPT_EN = """You are a research assistant. Review the given
+question along with the current web findings, then produce a concise 3-5
+sentence summary that provides direct information. Do not speculate; write
+only based on the information you found."""
+
+RESEARCH_PROMPTS = {"tr": RESEARCH_SYSTEM_PROMPT_TR, "en": RESEARCH_SYSTEM_PROMPT_EN}
+
+NO_RESULTS_TEXT = {
+    "tr": "Web sonucu bulunamadı. Genel bilgilerinle yanıt ver.",
+    "en": "No web results found. Answer using your general knowledge.",
+}
 
 
 @dataclass
@@ -61,23 +73,39 @@ class ResearchAgent:
         self.client = client
         self.model_name = model_name
 
-    def research(self, question: str) -> ResearchFinding:
+    def research(self, question: str, language: str = "tr") -> ResearchFinding:
         """Tek bir alt soruyu web'de araştırıp özetler."""
         web_results = search_web_ddg(question)
         sources = [r["url"] for r in web_results if r.get("url")]
 
-        context_text = "\n\n".join(
-            f"Başlık: {r['title']}\nÖzet: {r['snippet']}\nURL: {r['url']}"
-            for r in web_results
-        ) if web_results else "Web sonucu bulunamadı. Genel bilgilerinle yanıt ver."
+        if web_results:
+            label_title = "Title" if language == "en" else "Başlık"
+            label_summary = "Summary" if language == "en" else "Özet"
+            context_text = "\n\n".join(
+                f"{label_title}: {r['title']}\n{label_summary}: {r['snippet']}\nURL: {r['url']}"
+                for r in web_results
+            )
+        else:
+            context_text = NO_RESULTS_TEXT.get(language, NO_RESULTS_TEXT["tr"])
 
-        prompt = f"Araştırma Sorusu: {question}\n\nWeb Arama Bulguları:\n{context_text}\n\nLütfen bu bulgulara dayanarak soruyu özetle."
+        if language == "en":
+            prompt = (
+                f"Research Question: {question}\n\nWeb Search Findings:\n{context_text}\n\n"
+                "Please summarize the question based on these findings."
+            )
+        else:
+            prompt = (
+                f"Araştırma Sorusu: {question}\n\nWeb Arama Bulguları:\n{context_text}\n\n"
+                "Lütfen bu bulgulara dayanarak soruyu özetle."
+            )
+
+        system_prompt = RESEARCH_PROMPTS.get(language, RESEARCH_SYSTEM_PROMPT_TR)
 
         response = self.client.chat.completions.create(
             model=self.model_name,
             max_tokens=1000,
             messages=[
-                {"role": "system", "content": RESEARCH_SYSTEM_PROMPT},
+                {"role": "system", "content": system_prompt},
                 {"role": "user", "content": prompt},
             ],
             temperature=0.4,
@@ -91,6 +119,6 @@ class ResearchAgent:
             sources=sources,
         )
 
-    def research_all(self, questions: list[str]) -> list[ResearchFinding]:
+    def research_all(self, questions: list[str], language: str = "tr") -> list[ResearchFinding]:
         """Birden fazla alt soruyu sırayla araştırır."""
-        return [self.research(q) for q in questions]
+        return [self.research(q, language=language) for q in questions]

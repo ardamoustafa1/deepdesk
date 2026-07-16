@@ -1,0 +1,86 @@
+╭──────────────────────────────────────────────────────────────────────────────╮
+│ DeepDesk Araştırma Asistanı                                                  │
+│ Konu: yapay zeka ajanlarinin 2026 pazar trendleri                            │
+╰──────────────────────────────────────────────────────────────────────────────╯
+⠴ Planlanıyor, araştırılıyor ve yazılıyor...
+
+Alt Sorular:
+  • 2026 yılında yapay zeka ajanlarının pazar büyüklüğü ne olacak?
+  • Yapay zeka ajanlarının 2026 yılındaki en popüler uygulama alanları neler 
+olacak?
+  • 2026 yılında yapay zeka ajanları pazarında hangi şirketler liderlik edecek?
+  • Yapay zeka ajanlarının 2026 yılındaki pazar trendlerini etkileyen ana 
+faktörler nelerdir?
+
+Not: Geçmiş araştırmalarınızdan yararlanıldı.
+
+--- RAPOR ---
+
+# Yapay Zeka Ajanları 2026 Pazar Trendleri Raporu
+## Giriş
+Yapay zeka ajanları, son yıllarda teknoloji ve iş dünyasında önemli bir yer 
+kazanmıştır. Bu ajanlar, otomasyon, müşteri hizmetleri, sağlık sektörü ve finans
+gibi birçok alanda kullanılmaktadır. 2026 yılında yapay zeka ajanlarının pazar 
+trendlerini anlamak, iş liderleri ve yatırımcılar için önemli bir konudur. Bu 
+rapor, 2026 yılında yapay zeka ajanlarının pazar büyüklüğü, en popüler uygulama 
+alanları, liderlik edecek şirketler ve pazar trendlerini etkileyen ana 
+faktörleri ele alacaktır.
+
+## Ana Bölümler
+### Pazar Büyüklüğü
+2026 yılında yapay zeka ajanlarının pazar büyüklüğü hakkında güncel ve spesifik 
+bir veri bulunmamaktadır. Ancak, genel eğilimlere bakıldığında, yapay zeka 
+teknolojilerinin giderek daha fazla uygulama alanı bulması ve endüstriyel 
+kullanımın artmasıyla birlikte, yapay zeka ajanlarının pazar büyüklüğünün de 
+büyümesi beklenmektedir. Bu büyüme, özellikle müşteri hizmetleri, sağlık sektörü
+ve finans gibi sektörlerde yapay zeka ajanlarının daha fazla kullanılmasıyla 
+unterstütlenmektedir.
+
+### En Popüler Uygulama Alanları
+2026 yılındaki yapay zeka ajanlarının en popüler uygulama alanları hakkında 
+güncel ve spesifik web arama sonuçları bulunmamaktadır. Ancak genel bilgiler 
+ışığında, yapay zeka ajanlarının sağlık sektöründe, müşteri hizmetlerinde, 
+finansal işlemlerde, ulaşım ve lojistikte, eğitim ve öğretimde, ve güvenlik 
+sistemlerinde yaygın olarak kullanıldığını söyleyebiliriz. Bu alanlarda yapay 
+zeka ajanları, verilerin analizini, otomasyonu ve karar alma süreçlerini 
+hızlandırarak iş verimliliğini artırabilir.
+
+### Liderlik Edecek Şirketler
+2026 yılında yapay zeka ajanları pazarında liderlik edecek şirketler hakkında 
+güncel ve spesifik bilgiler bulunmamaktadır. Ancak, genel olarak bakıldığında, 
+yapay zeka ve ilgili teknolojilerde öncü şirketlerin genellikle teknoloji ve 
+yazılım sektöründe faaliyet gösteren büyük şirketler olduğu görülür. Bu 
+şirketler arasında Google, Microsoft, Amazon ve IBM gibi isimler thường olarak 
+öne çıkar. Bu şirketler, yapay zeka araştırmalarına ve geliştirmelerine önemli 
+yatırımlar yaparak, bu alanda liderlik için yarışmaktadır.
+
+### Pazar Trendlerini Etkileyen Ana Faktörler
+Yapay zeka ajanlarının 2026 yılındaki pazar trendlerini etkileyen ana faktörler 
+arasında teknolojinin hızlı gelişimi, artan veri miktarı ve gelişmiş 
+algoritmalar yer alıyor. Ayrıca, yapay zeka ajanlarının otomasyon, sağlık, 
+finans ve müşteri hizmetleri gibi sektörlerdeki kullanımı da pazar trendlerini 
+etkileyecek önemli faktörler arasında gösteriliyor. Yapay zeka ajanlarının 
+gelişimi ve uygulanması, iş süreçlerinin otomasyonu, müşteri deneyimi ve 
+verimlilik artırımı gibi konularda önemli etkileri olması bekleniyor.
+
+## Sonuç
+2026 yılında yapay zeka ajanlarının pazar trendleri, teknolojinin hızlı 
+gelişimi, artan veri miktarı ve gelişmiş algoritmalar gibi faktörlerle 
+şekillenecektir. Pazar büyüklüğü, en popüler uygulama alanları ve liderlik 
+edecek şirketler gibi konular, iş liderleri ve yatırımcılar için önemli birer 
+araştırma konusu olacaktır. Yapay zeka ajanlarının gelişimi ve uygulanması, iş 
+süreçlerinin otomasyonu, müşteri deneyimi ve verimlilik artırımı gibi konularda 
+önemli etkileri olması beklenmektedir.
+
+## Kaynaklar
+- Bu rapor için kullanılan bilgiler, genel araştırmalar ve internet 
+kaynaklarından derlenmiştir.
+- Spesifik ve güncel veri bulunmaması nedeniyle, rapor genel eğilimlere ve 
+beklentilere dayanmaktadır.
+
+> _Not: Bu rapor, geçmiş araştırmalarınızdan da faydalanılarak hazırlanmıştır._
+
+Rapor kaydedildi: reports/20260716_150033_report.md
+
+Geri Bildirim
+Bu raporu 1-5 arası puanlayın (atlamak için Enter): Yorumunuz (opsiyonel): Geri bildiriminiz kaydedildi. Teşekkürler!

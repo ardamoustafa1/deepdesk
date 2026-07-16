@@ -23,6 +23,7 @@ from groq import Groq
 from src.agents.planner_agent import PlannerAgent
 from src.agents.research_agent import ResearchAgent, ResearchFinding
 from src.agents.writer_agent import WriterAgent
+from src.memory.feedback_store import FeedbackStore
 from src.memory.vector_store import ResearchMemory
 from src.utils.config import Settings
 
@@ -34,6 +35,7 @@ class ResearchResult:
     findings: list[ResearchFinding]
     report: str
     used_memory: bool
+    language: str = "tr"
 
 
 class DeepDeskOrchestrator:
@@ -44,25 +46,35 @@ class DeepDeskOrchestrator:
         self.researcher = ResearchAgent(client, settings.model_name)
         self.writer = WriterAgent(client, settings.model_name)
         self.memory = ResearchMemory(settings.chroma_persist_dir)
+        self.feedback_store = FeedbackStore()
 
-    def run(self, topic: str) -> ResearchResult:
+    def run(self, topic: str, language: str = "tr") -> ResearchResult:
         # 1) Hafızada ilgili geçmiş araştırma var mı kontrol et
         related_memories = self.memory.find_related(topic)
         used_memory = len(related_memories) > 0
 
         # 2) Konuyu alt sorulara böl
-        sub_questions = self.planner.plan(topic)
+        sub_questions = self.planner.plan(topic, language=language)
 
         # 3) Her alt soruyu araştır
-        findings = self.researcher.research_all(sub_questions)
+        findings = self.researcher.research_all(sub_questions, language=language)
 
-        # 4) Nihai raporu yaz (varsa geçmiş bağlamı da ekleyerek)
-        report = self.writer.write_report(topic, findings)
+        # 4) Benzer konulardaki geçmiş kullanıcı geri bildirimlerini bul (US-11)
+        related_feedback = self.feedback_store.related(topic)
+
+        # 5) Nihai raporu yaz (varsa geçmiş bağlam ve geri bildirimleri de ekleyerek)
+        report = self.writer.write_report(
+            topic, findings, language=language, feedback_notes=related_feedback
+        )
         if used_memory:
-            memory_note = "\n\n> _Not: Bu rapor, geçmiş araştırmalarınızdan da faydalanılarak hazırlanmıştır._"
+            memory_note = (
+                "\n\n> _Note: This report also draws on your past research._"
+                if language == "en"
+                else "\n\n> _Not: Bu rapor, geçmiş araştırmalarınızdan da faydalanılarak hazırlanmıştır._"
+            )
             report += memory_note
 
-        # 5) Yeni raporu hafızaya kaydet
+        # 6) Yeni raporu hafızaya kaydet
         self.memory.save(topic, report)
 
         return ResearchResult(
@@ -71,4 +83,5 @@ class DeepDeskOrchestrator:
             findings=findings,
             report=report,
             used_memory=used_memory,
+            language=language,
         )

@@ -24,11 +24,13 @@ class FakeGroqClient:
 
     def __init__(self, fake_response_text: str):
         self.fake_response_text = fake_response_text
+        self.last_kwargs = None
         self.chat = SimpleNamespace(
             completions=SimpleNamespace(create=self._create)
         )
 
     def _create(self, **kwargs):
+        self.last_kwargs = kwargs
         return SimpleNamespace(choices=[FakeChoice(self.fake_response_text)])
 
 
@@ -60,3 +62,30 @@ def test_plan_strips_markdown_code_fence():
     result = agent.plan("test konusu")
 
     assert result == ["Soru 1?"]
+
+
+def test_plan_defaults_to_turkish_prompt():
+    fake_json = '{"sub_questions": ["Soru 1?"]}'
+    client = FakeGroqClient(fake_json)
+    agent = PlannerAgent(client, model_name="fake-model", max_questions=4)
+
+    agent.plan("test konusu")
+
+    system_message = client.last_kwargs["messages"][0]["content"]
+    user_message = client.last_kwargs["messages"][1]["content"]
+    assert "araştırma planlama uzmanısın" in system_message
+    assert user_message == "Araştırma konusu: test konusu"
+
+
+def test_plan_uses_english_prompt_for_en_language():
+    fake_json = '{"sub_questions": ["Q1?"]}'
+    client = FakeGroqClient(fake_json)
+    agent = PlannerAgent(client, model_name="fake-model", max_questions=4)
+
+    result = agent.plan("test topic", language="en")
+
+    system_message = client.last_kwargs["messages"][0]["content"]
+    user_message = client.last_kwargs["messages"][1]["content"]
+    assert "research planning expert" in system_message
+    assert user_message == "Research topic: test topic"
+    assert result == ["Q1?"]

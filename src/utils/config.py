@@ -24,6 +24,7 @@ class Settings:
     model_name: str
     chroma_persist_dir: str
     max_subquestions: int
+    default_language: str
 
 
 def load_settings() -> Settings:
@@ -42,4 +43,5 @@ def load_settings() -> Settings:
         model_name=os.getenv("DEEPDESK_MODEL", "llama-3.3-70b-versatile"),
         chroma_persist_dir=os.getenv("DEEPDESK_MEMORY_DIR", ".chroma_memory"),
         max_subquestions=int(os.getenv("DEEPDESK_MAX_SUBQUESTIONS", "4")),
+        default_language=os.getenv("DEEPDESK_DEFAULT_LANGUAGE", "tr").lower(),
     )
